@@ -1,0 +1,54 @@
+1. 
+	.CSEG
+		LDI R16, $FF ; load R16 as first number
+		LDI R17, $FF ; load R17 as second number
+		LDI R18, $00 ; carry part
+		LDI R19, $00 ; carry part
+		ADD R16, R17 ; add both numbers and store in R16
+		ADC R18, R19
+	NOP
+
+
+2.
+	.CSEG
+		LDI R17, $9 ;lower byte of first number
+		LDI R18, $8 ;higher byte of first number
+		LDI R19, $1 ;lower byte of second number
+		LDI R20, $5 ;higher byte of second number
+		LDI R21, $00 ;0x00 for carry
+		ADD R19, R17
+		BRCC abc
+		abc: LDI R21, $01
+		LDI R21, $00
+		ADC R18, R20
+	NOP
+
+3.
+	.CSEG
+		LDI R21, 0x10 ; load R21 as first number
+		LDI R22, 0x12 ; load R22 as second number
+		MUL R21, R22  ; multilication of first and second number
+	NOP
+
+		;The result of R21 x R22 is stored in R0 , R1 with R0 as LSB and R1 as MSB
+
+4.
+	.CSEG
+ 		LDI R16,$90
+ 		LDI R17,$91
+ 		LDI R18,$88
+ 		CP R16,R17
+ 		BRGE abc	
+		BRLT efg
+		abc: CP R18,R16
+		BRGE bcd
+		BRLT fgh
+		efg: CP R18,R17
+ 		BRGE ghi
+ 		BRLT ijk
+ 		bcd: MOV R19,R18
+ 		fgh: MOV R19,R16
+ 		ghi: MOV R19,R18
+ 		ijk: MOV R19,R17
+	NOP
+	
